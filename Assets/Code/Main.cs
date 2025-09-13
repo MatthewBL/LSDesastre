@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Main : MonoBehaviour
 {
-    public int counter = 0;
+    public int score = 0;
     public ObstacleGenerator obstacleGenerator = null;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -18,7 +18,7 @@ public class Main : MonoBehaviour
 
     public void IncreaseCounter()
     {
-        counter += 1;
+        score += 1;
         obstacleGenerator.GenerateObstacle();
     }
 }
