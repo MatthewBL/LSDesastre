@@ -2,14 +2,17 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem; // Add this for the new Input System
 
-public class MouseSize : MonoBehaviour
+public class MouseManager : MonoBehaviour
 {
-    public GameObject mouseObject;
     public Main main = null;
-    public Canvas canvas; // Assign your Canvas in the Inspector
+    Canvas canvas = null;
+    GameObject mouseObject = null;
 
     void Start()
     {
+        mouseObject = this.gameObject;
+        // Obtain the canvas where this object is placed
+        canvas = GetComponentInParent<Canvas>();
         Cursor.visible = false;
         if (mouseObject == null)
         {
@@ -28,7 +31,7 @@ public class MouseSize : MonoBehaviour
     void Update()
     {
         SetMouseObjectPosition();
-        SetMouseSize(32 + main.counter);
+        SetMouseSize(32 + main.score);
     }
 
     void SetMouseObjectPosition()
