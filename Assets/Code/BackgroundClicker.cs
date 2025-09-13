@@ -19,6 +19,6 @@ public class BackgroundClicker : MonoBehaviour, IPointerClickHandler
     // Increases counter by 1 when the object is clicked
     public void OnPointerClick(PointerEventData eventData)
     {
-        main.counter += 1;
+        main.IncreaseCounter();
     }
 }
