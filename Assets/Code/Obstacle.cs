@@ -12,6 +12,13 @@ public class Obstacle : MonoBehaviour, IPointerClickHandler
     private Image uiImage;
     private RectTransform rectTransform;
 
+    // Movement trajectory
+    public enum TrajectoryType { LeftToRight, Rotate }
+    public TrajectoryType trajectoryType;
+
+    private IMovementTrajectory movementTrajectory;
+    private Coroutine movementCoroutine;
+
     void Start()
     {
         uiImage = GetComponent<Image>();
@@ -33,6 +40,21 @@ public class Obstacle : MonoBehaviour, IPointerClickHandler
         uiImage.alphaHitTestMinimumThreshold = alphaThreshold;
 
         Debug.Log($"Alpha threshold set to: {alphaThreshold}. Clicks will only register on pixels with alpha > {alphaThreshold}");
+
+        switch (trajectoryType)
+        {
+            case TrajectoryType.LeftToRight:
+                movementTrajectory = new LeftToRightTrajectory();
+                break;
+            case TrajectoryType.Rotate:
+                //movementTrajectory = new RotateTrajectory();
+                break;
+        }
+
+        if (movementTrajectory != null)
+        {
+            movementCoroutine = StartCoroutine(movementTrajectory.MoveCoroutine(gameObject));
+        }
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -124,5 +146,8 @@ public class Obstacle : MonoBehaviour, IPointerClickHandler
         {
             Destroy(obj);
         }
+        if (movementCoroutine != null)
+            StopCoroutine(movementCoroutine);
+
     }
 }
