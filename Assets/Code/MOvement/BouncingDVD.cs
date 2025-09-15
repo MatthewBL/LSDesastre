@@ -20,7 +20,7 @@ public class BouncingDVD : IMovementTrajectory
         float directionDelay = 0.25f; //Para impedir que rebote varias veces en el mismo borde
         float timeCounter = 0f; //Contador de tiempo para el delay
 
-        while (true)
+        while (obj.activeInHierarchy)
         {
             if (timeCounter < directionDelay)
             {         
