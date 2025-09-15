@@ -47,7 +47,7 @@ public class Obstacle : MonoBehaviour, IPointerClickHandler
                 movementTrajectory = new LeftToRightTrajectory();
                 break;
             case TrajectoryType.Rotate:
-                //movementTrajectory = new RotateTrajectory();
+                movementTrajectory = new RotateTrajectory();
                 break;
         }
 
@@ -84,6 +84,13 @@ public class Obstacle : MonoBehaviour, IPointerClickHandler
             if (debugMode)
             {
                 ShowDebugInfo(eventData.position, pixelColor);
+            }
+
+            //Si colorobtenido no es transparente, se ejecuta la acción
+            if (pixelColor.a > alphaThreshold)
+            {
+                // Llamar a la función acción aquí
+                Debug.Log("Acción llamada porque el pixel no es transparente.");
             }
         }
     }
@@ -140,14 +147,6 @@ public class Obstacle : MonoBehaviour, IPointerClickHandler
 
     void OnDestroy()
     {
-        // Clean up any remaining debug objects
-        var debugObjects = GameObject.FindGameObjectsWithTag("DebugPixel");
-        foreach (var obj in debugObjects)
-        {
-            Destroy(obj);
-        }
-        if (movementCoroutine != null)
-            StopCoroutine(movementCoroutine);
-
+        if (movementCoroutine != null) StopCoroutine(movementCoroutine);
     }
 }
