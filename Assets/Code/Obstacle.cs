@@ -44,7 +44,7 @@ public class Obstacle : MonoBehaviour, IPointerClickHandler
         switch (trajectoryType)
         {
             case TrajectoryType.LeftToRight:
-                movementTrajectory = new LeftToRightTrajectory();
+                movementTrajectory = new Sideways();
                 break;
             case TrajectoryType.Rotate:
                 movementTrajectory = new RotateTrajectory();
