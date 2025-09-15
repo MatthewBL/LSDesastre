@@ -12,6 +12,13 @@ public class Obstacle : MonoBehaviour, IPointerClickHandler
     private Image uiImage;
     private RectTransform rectTransform;
 
+    // Movement trajectory
+    public enum TrajectoryType { LeftToRight, Rotate, UpAndDown, BouncingDVD, ShakingEffect }
+    public TrajectoryType trajectoryType;
+
+    private IMovementTrajectory movementTrajectory;
+    private Coroutine movementCoroutine;
+
     void Start()
     {
         uiImage = GetComponent<Image>();
@@ -33,6 +40,30 @@ public class Obstacle : MonoBehaviour, IPointerClickHandler
         uiImage.alphaHitTestMinimumThreshold = alphaThreshold;
 
         Debug.Log($"Alpha threshold set to: {alphaThreshold}. Clicks will only register on pixels with alpha > {alphaThreshold}");
+
+        switch (trajectoryType)
+        {
+            case TrajectoryType.LeftToRight:
+                movementTrajectory = new Sideways();
+                break;
+            case TrajectoryType.Rotate:
+                movementTrajectory = new RotateTrajectory();
+                break;
+            case TrajectoryType.UpAndDown:
+                movementTrajectory = new UpAndDown();
+                break;
+            case TrajectoryType.BouncingDVD:
+                movementTrajectory = new BouncingDVD();
+                break;
+            case TrajectoryType.ShakingEffect:
+                movementTrajectory = new ShakingEffect();
+                break;
+        }
+
+        if (movementTrajectory != null)
+        {
+            movementCoroutine = StartCoroutine(movementTrajectory.MoveCoroutine(gameObject));
+        }
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -62,6 +93,13 @@ public class Obstacle : MonoBehaviour, IPointerClickHandler
             if (debugMode)
             {
                 ShowDebugInfo(eventData.position, pixelColor);
+            }
+
+            //Si colorobtenido no es transparente, se ejecuta la acción
+            if (pixelColor.a > alphaThreshold)
+            {
+                // Llamar a la función acción aquí
+                Debug.Log("Acción llamada porque el pixel no es transparente.");
             }
         }
     }
@@ -118,11 +156,6 @@ public class Obstacle : MonoBehaviour, IPointerClickHandler
 
     void OnDestroy()
     {
-        // Clean up any remaining debug objects
-        var debugObjects = GameObject.FindGameObjectsWithTag("DebugPixel");
-        foreach (var obj in debugObjects)
-        {
-            Destroy(obj);
-        }
+        if (movementCoroutine != null) StopCoroutine(movementCoroutine);
     }
 }
