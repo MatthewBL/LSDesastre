@@ -280,7 +280,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ObstacleGenerator
   obstaclePrefabs:
-  - {fileID: 3403008316027571270, guid: 5dc608283e8a27c46a0b21e3b133d489, type: 3}
+  - {fileID: 1164410769547388826, guid: 87a734aec72eed144a6e5547ef195111, type: 3}
+  - {fileID: 5868674788565844933, guid: 33d90f13fc8fa8b4fa6aeb4cb36716ee, type: 3}
+  - {fileID: 8440230345377951529, guid: 3ec9a234bd058c44895c71e08ddd934d, type: 3}
+  - {fileID: 6714215938807324582, guid: 930b4dab9c90b2a4eb9e6ed28fdc663d, type: 3}
+  - {fileID: 2212888335595195737, guid: 6ac32761a52ce7b49922617da48c0245, type: 3}
+  obstacleWeights:
+  - 1
+  - 1.5
+  - 2
+  - 2.5
+  - 3
   targetCanvas: {fileID: 302324264}
 --- !u!1 &519420028
 GameObject:
