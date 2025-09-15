@@ -89,5 +89,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Obstacle
   debugMode: 1
-  alphaThreshold: 0.1
-  trajectoryType: 0
+  alphaThreshold: 0.631
+  trajectoryType: 3

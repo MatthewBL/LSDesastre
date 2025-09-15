@@ -13,7 +13,7 @@ public class Obstacle : MonoBehaviour, IPointerClickHandler
     private RectTransform rectTransform;
 
     // Movement trajectory
-    public enum TrajectoryType { LeftToRight, Rotate }
+    public enum TrajectoryType { LeftToRight, Rotate, UpAndDown, BouncingDVD }
     public TrajectoryType trajectoryType;
 
     private IMovementTrajectory movementTrajectory;
@@ -48,6 +48,12 @@ public class Obstacle : MonoBehaviour, IPointerClickHandler
                 break;
             case TrajectoryType.Rotate:
                 movementTrajectory = new RotateTrajectory();
+                break;
+            case TrajectoryType.UpAndDown:
+                movementTrajectory = new UpAndDown();
+                break;
+            case TrajectoryType.BouncingDVD:
+                movementTrajectory = new BouncingDVD();
                 break;
         }
 
