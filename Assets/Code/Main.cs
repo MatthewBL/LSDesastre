@@ -1,20 +1,35 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Main : MonoBehaviour
 {
     public int score = 0;
+    public bool playing= false;
     public ObstacleGenerator obstacleGenerator = null;
+    public float remaining = 60f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        StartCoroutine(CountdownCoroutine());
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator CountdownCoroutine()
     {
+        playing = true;
+        while (remaining > 0)
+        {
+            if (playing){
+            Debug.Log("Remaining: " + remaining);
+            yield return new WaitForSeconds(1f);
+            remaining--;
+            }
+        }
         
+        MainUtils.finalScore = score;
+        SceneManager.LoadScene("EndScene");
     }
+
 
     public void IncreaseCounter()
     {
