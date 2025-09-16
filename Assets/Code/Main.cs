@@ -26,6 +26,7 @@ public class Main : MonoBehaviour
             }
         }
         
+        MainUtils.finalScore = score;
         SceneManager.LoadScene("EndScene");
     }
 
