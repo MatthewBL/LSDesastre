@@ -3,7 +3,12 @@ using UnityEngine.EventSystems;
 
 public class PlaySound : MonoBehaviour, IPointerClickHandler
 {
-    public AudioSource audioSource = null;
+    private AudioSource audioSource;
+
+    void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     public void OnPointerClick(PointerEventData eventData)
     {
