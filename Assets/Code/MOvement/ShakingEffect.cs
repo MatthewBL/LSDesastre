@@ -19,6 +19,7 @@ public class ShakingEffect : IMovementTrajectory
             // Wait for cooldown before the next shake (optional)
             yield return new WaitForSeconds(shakeCooldown);
 
+            originalPosition = rectTransform.anchoredPosition;
             // Start shaking
             float shakeTimer = 0f;
             while (shakeTimer < shakeDuration)

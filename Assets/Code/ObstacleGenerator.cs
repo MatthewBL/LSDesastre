@@ -9,15 +9,6 @@ public class ObstacleGenerator : MonoBehaviour
     public List<float> obstacleWeights; //Probabilities for each obstacle (prefabs and weights must match in size)
     public Canvas targetCanvas; // Assign your Canvas in the Inspector
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        if (obstaclePrefabs.Count != obstacleWeights.Count)
-        {
-            Debug.LogError("Las listas de objetos y pesos no tienen la misma longitud");
-        }
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -49,8 +40,6 @@ public class ObstacleGenerator : MonoBehaviour
                 break;
             } 
         }
-
-        Debug.Log("Random value: " + randomValue + " / Total weight: " + totalWeight + ". Selected index: "+ selectedIndex);
 
         GameObject prefab = obstaclePrefabs[selectedIndex];
 

@@ -8,9 +8,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -1171855403838342289, guid: 5dc608283e8a27c46a0b21e3b133d489, type: 3}
+      propertyPath: trajectoryType
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 3403008316027571270, guid: 5dc608283e8a27c46a0b21e3b133d489, type: 3}
       propertyPath: m_Name
-      value: Obstacle
+      value: Shake
       objectReference: {fileID: 0}
     - target: {fileID: 6106043769583608582, guid: 5dc608283e8a27c46a0b21e3b133d489, type: 3}
       propertyPath: m_Pivot.x

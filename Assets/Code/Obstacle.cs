@@ -26,20 +26,16 @@ public class Obstacle : MonoBehaviour, IPointerClickHandler
 
         if (uiImage == null)
         {
-            Debug.LogError("No Image component found on this GameObject!");
             return;
         }
 
         if (uiImage.sprite == null)
         {
-            Debug.LogError("No sprite assigned to the Image component!");
             return;
         }
 
         // Set the alpha threshold for click detection
         uiImage.alphaHitTestMinimumThreshold = alphaThreshold;
-
-        Debug.Log($"Alpha threshold set to: {alphaThreshold}. Clicks will only register on pixels with alpha > {alphaThreshold}");
 
         switch (trajectoryType)
         {
@@ -86,20 +82,10 @@ public class Obstacle : MonoBehaviour, IPointerClickHandler
             // Get the color from the sprite texture at this UV position
             Color pixelColor = GetColorFromSpriteTexture(normalizedPoint);
 
-            // Print the color information
-            Debug.Log($"Clicked on visible pixel! UV: {normalizedPoint}, Color: {pixelColor}, RGBA: ({pixelColor.r}, {pixelColor.g}, {pixelColor.b}, {pixelColor.a})");
-
             // Optional: Visual feedback in debug mode
             if (debugMode)
             {
                 ShowDebugInfo(eventData.position, pixelColor);
-            }
-
-            //Si colorobtenido no es transparente, se ejecuta la acción
-            if (pixelColor.a > alphaThreshold)
-            {
-                // Llamar a la función acción aquí
-                Debug.Log("Acción llamada porque el pixel no es transparente.");
             }
         }
     }

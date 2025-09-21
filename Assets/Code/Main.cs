@@ -20,7 +20,6 @@ public class Main : MonoBehaviour
         while (remaining > 0)
         {
             if (playing){
-            Debug.Log("Remaining: " + remaining);
             yield return new WaitForSeconds(1f);
             remaining--;
             }

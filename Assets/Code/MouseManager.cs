@@ -16,7 +16,6 @@ public class MouseManager : MonoBehaviour
         Cursor.visible = false;
         if (mouseObject == null)
         {
-            Debug.LogError("Mouse object is not assigned.");
             return;
         }
         // Disable raycast target on the Image component
@@ -26,12 +25,14 @@ public class MouseManager : MonoBehaviour
 
         mouseObject.GetComponent<RectTransform>().sizeDelta = new Vector2(32, 32);
         SetMouseObjectPosition();
+
+        ChangeToRandomColor(img);
     }
 
     void Update()
     {
         SetMouseObjectPosition();
-        SetMouseSize(32 + main.score);
+        SetMouseSize(32 + main.score * 4);
     }
 
     void SetMouseObjectPosition()
@@ -57,6 +58,30 @@ public class MouseManager : MonoBehaviour
         if (mouseObject != null)
         {
             mouseObject.GetComponent<RectTransform>().sizeDelta = new Vector2(size, size);
+        }
+    }
+
+    // Method to change to a random color while preserving alpha
+    public void ChangeToRandomColor(Image image)
+    {
+        if (image != null)
+        {
+            // Store the current alpha value
+            float currentAlpha = image.color.a;
+
+            // Generate a random color with full opacity
+            Color randomColor = new Color(
+                Random.Range(0f, 1f),
+                Random.Range(0f, 1f),
+                Random.Range(0f, 1f),
+                1f // Start with full opacity
+            );
+
+            // Apply the original alpha value
+            randomColor.a = currentAlpha;
+
+            // Set the new color
+            image.color = randomColor;
         }
     }
 }
